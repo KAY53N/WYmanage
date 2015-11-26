@@ -1,0 +1,143 @@
+<include file="Public:header" />
+
+<div class="main-content-inner">
+	<!-- #section:basics/content.breadcrumbs -->
+	<div id="breadcrumbs" class="breadcrumbs">
+		<script type="text/javascript">
+			try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+		</script>
+
+		<ul class="breadcrumb">
+			<li>
+				<i class="ace-icon fa fa-home home-icon"></i>
+				<a href="#">Dashboard</a>
+			</li>
+
+			<li>
+				<a href="#">权限管理</a>
+			</li>
+			<li class="active">后台节点管理</li>
+		</ul><!-- /.breadcrumb -->
+
+	</div>
+
+	<!-- /section:basics/content.breadcrumbs -->
+	<div class="page-content">
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<div class="row">
+					<div class="col-xs-12">
+						<table class="table table-striped table-bordered table-hover" id="sample-table-2">
+							<thead>
+					            <tr>
+					            	<th>ID</th>
+					                <th>节点</th>
+					                <th>所属角色</th>
+					                <th>Module</th>
+					                <th>备注</th>
+					                <th>状态</th>
+					                <th width="120">编辑</th>
+								</tr>
+							</thead>
+
+							<tbody>
+	            <volist name="result" id="vo">
+	            <php>
+	            	if(!empty($vo))
+	            	{
+	            </php>
+	            	
+	            <tr>
+	                <td><{$vo.id}></td>
+	                <td><{$vo.title}></td>
+	                <td>
+	                <php>
+	                $roleIdList = explode(',', $vo['role_id']);
+	                $roleName = array();
+	                foreach($roleIdList as $v)
+	                {
+	                	$roleName[]=$roleList[$v];
+	                }
+	                echo implode($roleName, '、 ');
+	                </php>
+	                </td>
+	                <td><{$vo.module}>&nbsp;</td>
+	                <td><{$vo.remark}>&nbsp;</td>
+	                <td><{$vo.status}></td>
+	                <td align="center">
+	                	<div class="hidden-sm hidden-xs action-buttons">
+	                		&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="__MODULE__/Admin/Edit_node/id/<{$vo.id}>" class="green">
+								<i class="ace-icon fa fa-pencil bigger-130"></i>
+							</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="javascript:void(0)" url="__MODULE__/Admin/Del_node/id/<{$vo.id}>" uid="<{$vo.id}>" class="red delete">
+								<i class="ace-icon fa fa-trash-o bigger-130"></i>
+							</a>							
+						</div>
+	                </td>
+	            </tr>
+	            
+	            <php>
+	            		if(!empty($vo['data']))
+	            		{
+	            			foreach($vo['data'] as $k=>$v)
+	            			{
+	            				
+	            </php>
+	            
+		            <tr>
+				                <td><{$v.id}></td>
+				                <td><{$vo.title}>&nbsp;-&nbsp;<{$v.title}></td>
+				                <td>
+				                <php>
+				                $roleIdList = explode(',', $v['role_id']);
+				                $roleName = array();
+				                foreach($roleIdList as $vs)
+				                {
+				                	$roleName[]=$roleList[$vs];
+				                }
+				                echo implode($roleName, '、 ');
+				                </php>
+				                </td>
+				                <td><{$v.module}>&nbsp;</td>
+				                <td><{$v.remark}>&nbsp;</td>
+				                <td><{$v.status}></td>
+				                <td align="center">
+				                	<div class="hidden-sm hidden-xs action-buttons">
+				                		&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="__MODULE__/Admin/Edit_node/id/<{$v.id}>" class="green">
+											<i class="ace-icon fa fa-pencil bigger-130"></i>
+										</a>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="javascript:void(0)" url="__MODULE__/Admin/Del_node/id/<{$v.id}>" uid="<{$v.id}>" class="red delete">
+											<i class="ace-icon fa fa-trash-o bigger-130"></i>
+										</a>
+									</div>
+				                </td>
+		            </tr>
+		            
+	            <php>
+	            			}
+	            		}
+	            	}
+	            </php>
+	
+	            </volist>
+	        </empty>
+	            
+							</tbody>
+						</table>
+						
+					</div><!-- /.span -->
+				</div><!-- /.row -->
+
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+		<a class="btn btn-primary btn-bold fr" href="__MODULE__/Admin/Add_node"><i class="ace-icon fa glyphicon-plus bigger-120 white"></i>添加节点</a>
+	</div><!-- /.page-content -->
+	
+</div>
+
+<include file="Public:footer" />

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>Login Page - Ace Admin</title>
+
+		<meta name="description" content="User login page" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="__PUBLIC__/admin/aceadmin/assets/css/bootstrap.css" />
+		<link rel="stylesheet" href="__PUBLIC__/admin/aceadmin/assets/css/font-awesome.css" />
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="__PUBLIC__/admin/aceadmin/assets/css/ace-fonts.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="__PUBLIC__/admin/aceadmin/assets/css/ace.css" />
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="__PUBLIC__/admin/aceadmin/assets/css/ace-part2.css" />
+		<![endif]-->
+		<link rel="stylesheet" href="__PUBLIC__/admin/aceadmin/assets/css/ace-rtl.css" />
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="__PUBLIC__/admin/aceadmin/assets/css/ace-ie.css" />
+		<![endif]-->
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="__PUBLIC__/admin/aceadmin/assets/js/html5shiv.js"></script>
+		<script src="__PUBLIC__/admin/aceadmin/assets/js/respond.js"></script>
+		<![endif]-->
+	</head>
+
+	<body class="login-layout blur-login">
+		<div class="main-container">
+			<div class="main-content">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="login-container" style="padding-top:150px;">
+	
+							<div class="clearfix" id="info" style="width:100%;height:50px;overflow:hidden;color:red;font-weight:bold;font-size:22px;text-align:center;"><span></span></div>
+
+							<div class="space-6"></div>
+
+							<div class="position-relative">
+								<div id="login-box" class="login-box visible widget-box no-border">
+									<div class="widget-body">
+										<div class="widget-main">
+											<h4 class="header blue lighter bigger">
+												<i class="ace-icon fa fa-coffee green"></i>
+												WYmanage 后台管理系统
+											</h4>
+
+											<div class="space-6"></div>
+
+											<form action="__MODULE__/Index/Index">
+												<fieldset>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input id="username" type="text" class="form-control" placeholder="Username" value="admin" />
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input id="password" type="password" class="form-control" placeholder="Password" value="admin" />
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+													</label>
+													
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right col-sm-7" style="padding-left:0;">
+															<input id="code" type="text" class="form-control" placeholder="验证码" />
+														</span>
+														<img class="col-sm-5" src="__MODULE__/Login/Verify" onclick="this.src='__MODULE__/Login/Verify?'+Math.random()" />
+													</label>
+													
+													<div class="space"></div>
+
+													<div class="clearfix">
+														<label class="inline">
+															<input type="checkbox" class="ace" />
+															<span class="lbl"> Remember Me</span>
+														</label>
+
+														<button id="submit" type="button" class="width-35 pull-right btn btn-sm btn-primary">
+															<i class="ace-icon fa fa-key"></i>
+															<span class="bigger-110">Login</span>
+														</button>
+													</div>
+
+													<div class="space-4"></div>
+												</fieldset>
+											</form>
+
+										</div><!-- /.widget-main -->
+
+									</div><!-- /.widget-body -->
+								</div><!-- /.login-box -->
+
+							</div><!-- /.position-relative -->
+
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.main-content -->
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='__PUBLIC__/admin/aceadmin/assets/js/jquery.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+		<script type="text/javascript">
+		 window.jQuery || document.write("<script src='__PUBLIC__/admin/aceadmin/assets/js/jquery1x.js'>"+"<"+"/script>");
+		</script>
+		<![endif]-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='__PUBLIC__/admin/aceadmin/assets/js/jquery.mobile.custom.js'>"+"<"+"/script>");
+		</script>
+		<script type="text/javascript" src="__PUBLIC__/js/jquery.effects.core.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/js/jquery.effects.shake.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/js/jquery.effects.bounce.js"></script>
+		<script>
+		if(top.location.pathname != location.pathname)
+		{
+			top.location.href="__MODULE__/Login/Index";
+		}
+		$(function() {
+			$("input").keydown(function(e){
+				if(e.keyCode==13){
+				   $('#submit').click(); //处理事件
+				}
+			}); 
+			// run the currently selected effect
+			var runSubmit = true;
+		    function runEffect() {
+				// run the effect
+		        if(runSubmit)
+		        {
+		            runSubmit = false;
+		            $("#login").hide("shake", 60, function(){
+		                runSubmit = true;
+		            });
+		        }
+			};
+		
+		    $('#submit').click(function() {
+				var usernameVal = $('#username').val();
+				var passwrodVal = $('#password').val();
+		
+		        $.post("__MODULE__/Login/login_user",{username:usernameVal, password:passwrodVal},function(json)
+		        {
+		            if(json.status == 1)
+		            {
+		                $.getJSON("__MODULE__/Login/Check_verify",{code:$.trim($('#code').val())},function(json)
+                        {
+                            if(json.status == 1)
+                            {
+                            	window.location.href="__MODULE__/Index/Index";
+                            }
+                            else
+                            {
+                                runEffect();
+                                $("#info").append("<span>验证码错误</span>").show("shake",200);
+                                setTimeout(function() {
+                                    $("#info span").remove();
+                                },4000)
+                            }
+                        });
+		            }
+		            else
+		            {
+		                runEffect();
+		                if($('#info span').text().length == 0)
+		                {
+		                    $("#info").append("<span>用户名或密码错误</span>").show("shake",200);
+		                    setTimeout(function(){
+		                        $( "#info span" ).remove();
+		                    }, 2000 )
+		                }
+		            }
+		        }, 'json');
+		        return false;
+			});
+		});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<include file="Public:header" />
+
+<div class="main-content-inner">
+	<!-- #section:basics/content.breadcrumbs -->
+	<div id="breadcrumbs" class="breadcrumbs">
+		<script type="text/javascript">
+			try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+		</script>
+
+		<ul class="breadcrumb">
+			<li>
+				<i class="ace-icon fa fa-home home-icon"></i>
+				<a href="#">Dashboard</a>
+			</li>
+
+			<li>
+				<a href="#">权限管理</a>
+			</li>
+			<li class="active">分类管理</li>
+		</ul><!-- /.breadcrumb -->
+
+	</div>
+
+	<!-- /section:basics/content.breadcrumbs -->
+	<div class="page-content">
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<div class="row">
+					<div class="col-xs-12">
+						<table class="table table-striped table-bordered table-hover" id="sample-table-2">
+							<thead>
+					            <tr>
+					            	<th>分类名称</th>
+					                <th>是否显示</th>
+					                <th width="120">操作</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<volist name="result.list" id="vo">
+					            <tr>
+					                <td><php>for($i=0; $i<$vo["count"]*8; $i++){echo "&nbsp;";}</php><i class="ace-icon fa fa-folder-o red"></i>&nbsp;<a href="###" id="name"><{$vo.name}></a></td>
+					                <td>YES</td>
+					                <td align="center">
+					                	<div class="hidden-sm hidden-xs action-buttons">
+											<a href="__MODULE__/Category/Edit_category/id/<{$vo.id}>" class="green">
+												<i class="ace-icon fa fa-pencil bigger-130"></i>
+											</a>
+											&nbsp;&nbsp;&nbsp;&nbsp;
+											<a href="javascript:void(0)" url="__MODULE__/Category/Del_category/id/<{$vo.id}>" uid="<{$vo.id}>" class="red delete">
+												<i class="ace-icon fa fa-trash-o bigger-130"></i>
+											</a>											
+										</div>
+					                </td>					                
+						        </tr>
+		            			</volist>
+							</tbody>
+						</table>
+						
+						<div class="row"><{$show}></div>
+						
+					</div><!-- /.span -->
+				</div><!-- /.row -->
+
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+		<a class="btn btn-primary btn-bold fl" href="__MODULE__/Category/Add_category" href="__MODULE__/Category/add_category"><i class="ace-icon fa glyphicon-plus bigger-120 white"></i>添加分类</a>
+	</div><!-- /.page-content -->
+	
+</div>
+
+<include file="Public:footer" />
